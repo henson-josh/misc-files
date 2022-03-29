@@ -1,0 +1,26 @@
+### ansible-builder build will look for a file name "execution-environment.yml" use -f to specify filename.
+### The -t flag will give your automation execution environment image a specific name.
+### x509 cert error add --tls-verify=false
+# podman images
+# podman tag [current image name] [auto_hub_url/new image name]
+
+
+version: 1.0.0
+
+build_arg_defaults:    ### Lists default values for build arguments
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: "-v"
+
+ansible_config: '/etc/ansible/ansible.cfg'   # Specifies the ansible.cfg file path
+
+dependencies:  ### Specifies the location of various requirements files
+  galaxy: /home/vagrant/exe-env/collections/requirements.yml
+  #  python: requirements.txt
+  #  system: bindep.txt
+
+additional_build_steps:    ### Commands for additional custom build steps
+  prepend: |
+    RUN whoami
+    RUN cat /etc/os-release
+  append:
+    - RUN echo This is a post-install command!
+    - RUN ls -la /etc
