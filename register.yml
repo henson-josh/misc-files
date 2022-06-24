@@ -1,0 +1,23 @@
+- name: file creation to test playbook
+  hosts: all
+  tasks:
+    - name: Leaving a mark
+      command: "touch /tmp/test1"
+    - name: Gathering /tmp contents
+      shell: 'ls /tmp'
+      register: result
+    - name: Print /tmp contents
+      debug:
+        msg: "{{ result }}"
+    - name: send the e-mail
+      mail:
+        host: smtp.gmail.com
+        port: 465
+        username: john.smith@gmail.com
+        password: <redacted>
+        to: IT Dept <itdept@example.com>
+        subject: Ansible-Test
+        body: |
+               Temp directory contents 
+               {{ result.stdout }}
+      delegate_to: localhost
