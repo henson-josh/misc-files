@@ -1,0 +1,6 @@
+- name: Verify env variable used
+  hosts: all
+  tasks:
+    - name: Basic usage
+      ansible.builtin.debug:
+        msg: "'{{ lookup('ansible.builtin.env', 'PATH') }}'"
