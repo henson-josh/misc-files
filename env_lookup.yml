@@ -1,6 +1,6 @@
-- name: Verify env variable used
+- name: Verify extra env variable from AAP/Tower
   hosts: all
   tasks:
-    - name: Basic usage
+    - name: Lookup Variable
       ansible.builtin.debug:
-        msg: "'{{ lookup('ansible.builtin.env', 'PATH') }}'"
+        msg: "The persistent timeout is '{{ lookup('ansible.builtin.env', 'ANSIBLE_PERSISTENT_COMMAND_TIMEOUT') }}'seconds."
