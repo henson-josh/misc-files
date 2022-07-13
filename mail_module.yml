@@ -21,3 +21,26 @@
                Temp directory contents 
                {{ result.stdout }}
       delegate_to: localhost
+
+
+############################################
+## Mail Module that will work with playbook being used in Tower/Controller
+- name: file creation to test playbook
+  hosts: all
+  tasks:
+    - name: Leaving a mark
+      command: "touch /tmp/test1"
+
+    - name: send the e-mail
+      #  local_action:
+      # module: community.general.mail
+      mail:
+        host: smtp.gmail.com
+        port: 465
+        username: john.smith@gmail.com
+        password: IT Dept <itdept@example.com>
+        to: jdh0986@gmail.com
+        subject: Ansible-Test
+        body: |
+          Test E-mail Notification
+      run_once: True
