@@ -23,8 +23,12 @@
       delegate_to: localhost
 
 
-############################################
+###########################################################################
 ## Mail Module that will work with playbook being used in Tower/Controller
+#### ansible-galaxy collection install community.general
+#### Copy the ~/.ansible/collections directory to 
+###### /usr/share/ansible/plugins/modules and 
+###### /usr/share/ansible/collections
 - name: file creation to test playbook
   hosts: all
   tasks:
@@ -39,7 +43,7 @@
         port: 465
         username: john.smith@gmail.com
         password: IT Dept <itdept@example.com>
-        to: jdh0986@gmail.com
+        to: whomitmay@conern.com
         subject: Ansible-Test
         body: |
           Test E-mail Notification
